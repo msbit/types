@@ -37,7 +37,7 @@ Open3.popen2('npx tsserver') do |stdin, stdout, _wait_thr|
 
   response = nil
 
-  loop do
+  70.times do
     response = wait_response(stdout)
     next if response.nil?
 
@@ -55,7 +55,7 @@ Open3.popen2('npx tsserver') do |stdin, stdout, _wait_thr|
     }
   }.to_json)
 
-  loop do
+  10.times do
     response = wait_response(stdout)
     next if response.nil?
 
