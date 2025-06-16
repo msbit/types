@@ -59,10 +59,8 @@ Open3.popen2('npx tsserver') do |stdin, stdout, _wait_thr|
     response = wait_response(stdout)
     next if response.nil?
 
-    if response['type'] == 'response' && response['command'] == 'quickinfo' && response['request_seq'] == 1 && response['success'] == true
-      break
-    end
+    break if response['type'] == 'response' && response['command'] == 'quickinfo' && response['request_seq'] == 1
   end
 
-  puts(response['body']['displayString'])
+  puts(response['success'] ? response['body']['displayString'] : response['message'])
 end
