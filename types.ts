@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { dirname } from 'node:path';
 import { argv, exit } from 'node:process';
 
