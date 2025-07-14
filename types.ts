@@ -62,6 +62,7 @@ function _getType(program: Program, sourceFileName: string, sourceRow: number, s
 }
 
 if (argv.length < 5) {
+  console.log('usage:', argv[0], argv[1], '<filename>', '<row>', '<column>');
   exit(0);
 }
 

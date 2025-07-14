@@ -38,6 +38,7 @@ function _getType(program, sourceFileName, sourceRow, sourceColumn) {
     return checker.typeToString(type, undefined, TypeFormatFlags.NoTruncation);
 }
 if (argv.length < 5) {
+    console.log('usage:', argv[0], argv[1], '<filename>', '<row>', '<column>');
     exit(0);
 }
 const [sourceFileName, sourceRow, sourceColumn] = argv.slice(2);
