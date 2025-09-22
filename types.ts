@@ -58,7 +58,13 @@ function _getType(program: Program, sourceFileName: string, sourceRow: number, s
 
   const checker = program.getTypeChecker();
   const type = checker.getTypeAtLocation(node);
-  return checker.typeToString(type, undefined, TypeFormatFlags.NoTruncation);
+  const result = [checker.typeToString(type, undefined, TypeFormatFlags.NoTruncation)];
+  if (type.isUnion()) {
+    for (const subType of type.types) {
+      result.push(` - ${checker.typeToString(subType, undefined, TypeFormatFlags.NoTruncation)}`);
+    }
+  }
+  return result.join('\n');
 }
 
 if (argv.length < 5) {

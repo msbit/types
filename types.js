@@ -35,7 +35,13 @@ function _getType(program, sourceFileName, sourceRow, sourceColumn) {
     }
     const checker = program.getTypeChecker();
     const type = checker.getTypeAtLocation(node);
-    return checker.typeToString(type, undefined, TypeFormatFlags.NoTruncation);
+    const result = [checker.typeToString(type, undefined, TypeFormatFlags.NoTruncation)];
+    if (type.isUnion()) {
+        for (const subType of type.types) {
+            result.push(` - ${checker.typeToString(subType, undefined, TypeFormatFlags.NoTruncation)}`);
+        }
+    }
+    return result.join('\n');
 }
 if (argv.length < 5) {
     console.log('usage:', argv[0], argv[1], '<filename>', '<row>', '<column>');
